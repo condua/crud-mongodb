@@ -152,8 +152,8 @@ router.get('/', async (req, res) => {
 const transporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
-        user: 'phanhoangphuc0509@gmail.com',
-        pass: 'yjzkzpgsjqbhtqah'
+        user: 'noreply.ewallet.hcmut@gmail.com',
+        pass: 'wsxweqdjcbdzenfn'
     }
 });
 
@@ -204,12 +204,39 @@ router.post('/forgot-password', async (req, res) => {
     // Send the OTP to the user's email
     const mailOptions = {
         from: {
-            name: 'Tony Phan',
-            address: 'phanhoangphuc0509@gmail.com'
+            name: 'E-Wallet',
+            address: 'noreply.ewallet.hcmut@gmail.com'
         },
         to: email,
         subject: 'Reset Password OTP',
-        text: `Your OTP for resetting password is: ${otp}`,
+        // text: `Your OTP for resetting password is: ${otp}`,
+        html:`
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <base target="_top">
+        </head>
+        <body>
+            <div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2">
+                <div style="margin:50px auto;width:80%;padding:20px 0">
+                    <div style="border-bottom:5px solid #eee">
+                        <a href="" style="font-size:30px;color: #f7c800;text-decoration:none;font-weight:600">E-Wallet</a>
+                    </div>
+                    <p style="font-size:15px">Hello ${email},</p>
+                    <p>Thank you for choosing E-Wallet. Use this OTP to change your account password on the E-Wallet.</p>
+                    <p>Remember, Never share this OTP with anyone.</p>
+                    <h2 style="background: #00466a;margin: 0 auto;width: max-content;padding: 0 10px;color: #fff;border-radius: 4px;">${otp}</h2>
+                    <p style="font-size:15px;">Regards,<br />Team E-Wallet</p>
+                    <hr style="border:none;border-top:5px solid #eee" />
+                    <div style="float:right;padding:8px 0;color:#aaa;font-size:0.8em;line-height:1;font-weight:300">
+                        <p>E-Wallet Inc</p>
+                        <p>address</p>
+                    </div>
+                </div>
+            </div>
+        </body>
+        </html>
+    `
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
