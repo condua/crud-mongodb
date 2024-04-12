@@ -366,6 +366,5 @@ router.post('/reset-password', async (req, res) => {
     }
   });
   
-// Add other CRUD operations (e.g., get user by ID, update user, delete user) here
 
 module.exports = router;

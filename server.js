@@ -4,6 +4,9 @@ const mongoose = require('mongoose');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger');
 const userRoutes = require('./router/user.js');
+
+const emailMarketingRoutes = require('./router/emailMarketing.js')
+
 const cors = require('cors')
 
 const app = express();
@@ -24,6 +27,7 @@ app.use(cors());
 
 // Routes
 app.use('/users', userRoutes);
+app.use('/email', emailMarketingRoutes);
 
 // Swagger documentation
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
