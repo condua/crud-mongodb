@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger');
 const userRoutes = require('./router/user.js');
+const cors = require('cors')
 
 const app = express();
 const port = 3000;
@@ -18,6 +19,8 @@ mongoose.connect('mongodb+srv://phanhoangphuc0311:%40Phuc1755@cluster0.kkn7cwq.m
   });
 
 app.use(bodyParser.json());
+
+app.use(cors());
 
 // Routes
 app.use('/users', userRoutes);
