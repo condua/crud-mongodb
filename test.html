@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Form Đăng ký</title>
+</head>
+<body>
+
+<h1>Form Đăng ký</h1>
+
+<form id="registerForm" action="http://localhost:3000/users/register" method="POST">
+    <label for="username">Họ và tên:</label><br>
+    <input type="text" id="username" name="username"><br>
+    <label for="email">Email:</label><br>
+    <input type="email" id="email" name="email"><br>
+    <label for="password">Mật khẩu:</label><br>
+    <input type="password" id="password" name="password"><br><br>
+    <button type="submit">Đăng ký</button>
+</form>
+
+<script>
+document.getElementById('registerForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const formData = new FormData(this);
+    const formObject = {};
+    formData.forEach((value, key) => {
+        formObject[key] = value;
+    });
+
+    fetch('http://localhost:3000/users/register', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formObject),
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.error) {
+            throw new Error(data.error);
+        }
+        console.log('Đăng ký thành công!');
+        alert('Đăng ký thành công!');
+
+        // Gửi thông tin đăng ký email marketing
+        const emailMarketingData = {
+            name: formObject.username,
+            email: formObject.email,
+        };
+        fetch('http://localhost:3000/email/email-marketing', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(emailMarketingData),
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Đăng ký email marketing thành công!');
+            // Có thể thực hiện các hành động khác sau khi đăng ký thành công
+            
+        })
+        .catch(error => {
+            console.error('Lỗi khi đăng ký email marketing:', error);
+        });
+    })
+    .catch(error => {
+        console.error('Lỗi khi đăng ký:', error);
+        alert('Lỗi: '+ error)
+
+    });
+});
+</script>
+
+</body>
+</html>

@@ -27,7 +27,7 @@ router.post('/email-marketing', (req, res) => {
           address: 'noreply.ewallet.hcmut@gmail.com',
         },
         to: email,
-        subject: `Chào mừng ${name} đã đến với E-Wallet`,
+        subject: `Chào mừng ${name} đã sử dụng ứng dụng E-Wallet`,
         // text: `Hello ${name},\n\nThank you for choosing E-Wallet. Use this OTP to change your account password on E-Wallet.\n\nOTP: ${otp}\n\nRemember, never share this OTP with anyone.\n\nRegards,\nTeam E-Wallet`,
         html: `
         <!DOCTYPE html>

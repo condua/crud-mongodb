@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('./swagger');
+const swaggerDocument = require('./swagger.js');
 const userRoutes = require('./router/user.js');
 
 const emailMarketingRoutes = require('./router/emailMarketing.js')
