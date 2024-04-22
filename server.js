@@ -6,6 +6,7 @@ const swaggerDocument = require('./swagger.js');
 const userRoutes = require('./router/user.js');
 
 const emailMarketingRoutes = require('./router/emailMarketing.js')
+const emailWelcome = require('./router/emailWelcome.js')
 
 const cors = require('cors')
 
@@ -28,6 +29,7 @@ app.use(cors());
 // Routes
 app.use('/users', userRoutes);
 app.use('/email', emailMarketingRoutes);
+app.use('/email', emailWelcome);
 
 // Swagger documentation
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));

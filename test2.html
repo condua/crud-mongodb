@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register Form</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-image: url('https://rare-gallery.com/uploads/posts/569315-Coca-cola-Drink.jpg'); /* Đường dẫn đến ảnh background */
+        background-size: cover;
+    }
+
+    form {
+        width: 300px;
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    input {
+        width: 100%;
+        margin-bottom: 10px;
+        padding: 8px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    button {
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+<H1 style="color: #fff;">Đăng ký nhận sản phẩm mới từ chúng tôi</H1>
+<form id="registerForm">
+    <input type="text" name="name" placeholder="Tên của bạn">
+    <input type="email" name="email" placeholder="Email của bạn">
+    <button type="submit">Đăng ký</button>
+</form>
+<script>
+    document.getElementById('registerForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(this);
+        const formObject = {};
+        formData.forEach((value, key) => {
+            formObject[key] = value;
+        });
+    
+        fetch('http://localhost:3000/email/email-welcome', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formObject),
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Cảm ơn bạn đã quan tâm tới sản phẩm của chúng tôi. Chúng tôi sẽ phẩm hồi tới bạn sớm nhất.');
+            // Có thể thực hiện các hành động khác sau khi đăng ký email marketing thành công
+            alert('Đăng ký email marketing thành công!');
+        })
+        .catch(error => {
+            console.error('Lỗi khi đăng ký email marketing:', error);
+            alert('Lỗi khi đăng ký email marketing: '+ error);
+        });
+    });
+    </script>
+    
+
+</body>
+</html>
