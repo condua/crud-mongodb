@@ -62,7 +62,7 @@
             formObject[key] = value;
         });
     
-        fetch('http://localhost:3000/email/email-welcome', {
+        fetch('https://crud-mongodb-gzyk.onrender.com/email/email-welcome', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -73,7 +73,7 @@
         .then(data => {
             console.log('Cảm ơn bạn đã quan tâm tới sản phẩm của chúng tôi. Chúng tôi sẽ phẩm hồi tới bạn sớm nhất.');
             // Có thể thực hiện các hành động khác sau khi đăng ký email marketing thành công
-            alert('Đăng ký email marketing thành công!');
+            alert('Cảm ơn ' + formObject.name + ' đã quan tâm tới sản phẩm của chúng tôi. Chúng tôi sẽ phẩm hồi tới bạn sớm nhất.');
         })
         .catch(error => {
             console.error('Lỗi khi đăng ký email marketing:', error);
